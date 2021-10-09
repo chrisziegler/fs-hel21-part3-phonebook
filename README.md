@@ -4,9 +4,11 @@
 
 ----
 
-Location of Phonebook App: 
+Location of Phonebook App: https://stormy-journey-51762.herokuapp.com/
 
-Location of JSON API Server: h
+Location of Heroku git repo: https://git.heroku.com/stormy-journey-51762.git
+
+Location of local JSON API Server: http://localhost:3001/api/persons
 
 **! update this section after completion !**
 * fs-hel21-part3-phonebook is the backend Node Express Server for the frontend React Application located at ...codegrunt/fs-hel21-sup/part2/notes *Code reactors or updates to the react frontend must occur there.*

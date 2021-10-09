@@ -44,11 +44,11 @@ let persons = [
 ]
 
 // GET Index Route
-// app.get('/', (req, res) => {
-//   res.send(
-//     `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
-//   )
-// })
+app.get('/', (req, res) => {
+  res.send(
+    `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
+  )
+})
 
 // GET Info Route
 app.get('/info', (req, res) => {
