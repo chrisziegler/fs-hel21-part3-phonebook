@@ -12,6 +12,7 @@ morgan.token('info', req => JSON.stringify(req.info))
 
 // app.use(favicon(path.join(__dirname + '/public/images/favicon.ico')))
 app.use(express.json())
+app.use(express.static('build'))
 // const appLogStream = fs.createWriteStream(path.join(__dirname, 'app.log'))
 app.use(
   morgan(
@@ -43,12 +44,13 @@ let persons = [
   },
 ]
 
-// GET Index Route
-app.get('/', (req, res) => {
-  res.send(
-    `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
-  )
-})
+// Index Route
+// Needed by heroku until add express.static('build')
+// app.get('/', (req, res) => {
+//   res.send(
+//     `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
+//   )
+// })
 
 // GET Info Route
 app.get('/info', (req, res) => {
@@ -59,11 +61,6 @@ app.get('/info', (req, res) => {
     </div>`,
   )
 })
-
-// FAVICON error handling
-// app.get('/favicon.ico', (req, res) => {
-//   return res.sendStatus(204)
-// })
 
 // GET All Route
 app.get('/api/persons', (req, res) => {
