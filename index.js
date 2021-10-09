@@ -1,13 +1,16 @@
 const express = require('express')
 const app = express()
-const path = require('path')
+// const path = require('path')
 // const favicon = require('serve-favicon')
 // const fs = require('fs')
 const morgan = require('morgan')
+const cors = require('cors')
+
+app.use(cors())
 
 morgan.token('info', req => JSON.stringify(req.info))
 
-app.use(favicon(path.join(__dirname + '/public/images/favicon.ico')))
+// app.use(favicon(path.join(__dirname + '/public/images/favicon.ico')))
 app.use(express.json())
 // const appLogStream = fs.createWriteStream(path.join(__dirname, 'app.log'))
 app.use(
@@ -41,11 +44,11 @@ let persons = [
 ]
 
 // GET Index Route
-app.get('/', (req, res) => {
-  res.send(
-    `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
-  )
-})
+// app.get('/', (req, res) => {
+//   res.send(
+//     `<div style='text-align: center; margin-top: 5rem; font-size: 1.5rem'>Go to <a href="/api/persons">/api/persons</a> for api</div>`,
+//   )
+// })
 
 // GET Info Route
 app.get('/info', (req, res) => {
@@ -119,7 +122,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
