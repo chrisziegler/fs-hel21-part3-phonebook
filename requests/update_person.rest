@@ -1,7 +1,7 @@
-Put http://localhost:3001/api/persons/6162774ad1f820390a961433
+Put http://localhost:3001/api/persons/61650ce5a7f121c74cd5a557
 Content-Type: application/json
 
 {
-  "name": "Steve Jobs",
+  "name": "deleteme",
   "number": "509 332-1796"
 }

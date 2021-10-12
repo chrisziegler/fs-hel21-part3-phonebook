@@ -6,6 +6,7 @@ const app = express()
 // const fs = require('fs')
 const morgan = require('morgan')
 const cors = require('cors')
+const uniqueValidator = require('mongoose-unique-validator')
 const Person = require('./models/person')
 
 app.use(cors())
@@ -79,15 +80,14 @@ app.post('/api/persons', (req, res, next) => {
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
-  const body = req.body
+  const { name, number } = req.body
+  req.info = req.body
+  const person = { name, number }
 
-  const person = {
-    name: body.name,
-    number: body.number,
-  }
-
-  Person.findByIdAndUpdate(req.params.id, person, { new: true })
-
+  Person.findByIdAndUpdate(req.params.id, person, {
+    new: true,
+    runValidators: true,
+  })
     .then(updatedPerson => {
       res.json(updatedPerson)
     })
@@ -112,6 +112,18 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   }
+
+  if (error.code === 11000) {
+    return response.status(400).send({ error: 'duplicate key error' })
+  }
+
+  if (error.name === 'ValidationError') {
+    return response.status(400).send({ error: error.message })
+  }
+  if (error.name === 'TypeError') {
+    return response.status(400).send({ error: error.message })
+  }
+
   next(error)
 }
 
