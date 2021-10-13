@@ -6,7 +6,6 @@ const app = express()
 // const fs = require('fs')
 const morgan = require('morgan')
 const cors = require('cors')
-const uniqueValidator = require('mongoose-unique-validator')
 const Person = require('./models/person')
 
 app.use(cors())
@@ -96,7 +95,7 @@ app.put('/api/persons/:id', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndDelete(req.params.id)
-    .then(result => res.status(204).end())
+    .then(() => res.status(204).end())
     .catch(error => next(error))
 })
 
